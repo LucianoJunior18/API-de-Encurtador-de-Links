@@ -5,7 +5,7 @@ export const registerSchema = z.object ({
     .string({
         required_error: "Nome é Obrigatorio",
     })
-    .min(3, "Nome deve ter no minimo 3 caracteres"),
+    .min(3, "Nome deve ter no mínimo 3 caracteres"),
 
     email: z
     .string({
@@ -17,7 +17,7 @@ export const registerSchema = z.object ({
     .string({
         required_error: "Senha é Obrigatorio",
     })
-    .min(6, "Senha deve ter no minimo 6 caracteres"),
+    .min(6, "Senha deve ter no mínimo 6 caracteres"),
 
 });
 
@@ -32,5 +32,5 @@ export const loginSchema = z.object ({
     .string({
         required_error: "Senha é obrigatorio",
     })
-    .min(6, "Senha deve ter no minimo 6 caracteres"),
-})
+    .min(6, "Senha deve ter no mínimo 6 caracteres"),
+});

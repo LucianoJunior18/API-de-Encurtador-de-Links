@@ -8,6 +8,6 @@ export const validateSchema = (schema) => (req, res, next) => {
         return res.status(400).json({
             message: "Dados inválidos",
             errors: error.errors,
-        })
+        });
     }
-}
+};
