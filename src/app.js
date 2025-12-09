@@ -15,7 +15,7 @@ app.use(express.json());
 
 // ROTA DE TESTE
 app.get("/health", (req, res) => {
-    res.status(200).send("API is healthy");
+    res.status(200).send("API funcionando corretamente!");
 });
 
 
