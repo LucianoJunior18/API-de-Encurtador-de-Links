@@ -1,36 +1,36 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("postgresql://encurtador_links_db_wufd_user:eoQG0lQVXoFr1xX86Sm5KmNQWNQ6iabH@dpg-d4os52mmcj7s7382u34g-a.virginia-postgres.render.com/encurtador_links_db_wufd?sslmode=require")  // ✅ ADICIONAR ESTA LINHA
 }
 
-
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
+  name      String
   email     String   @unique
   password  String
-  name      String
+  role      String   @default("USER")
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
   links     Link[]
 }
 
 model Link {
-  id         Int      @id @default(autoincrement())
-  original   String
-  shortCode  String   @unique
-  clicks     Int      @default(0)
-  deletedAt  DateTime?
-  createdAt  DateTime @default(now())
-  userId     Int
-
-  user       User     @relation(fields: [userId], references: [id])
+  id          String    @id @default(uuid())
+  originalUrl String
+  shortCode   String    @unique
+  clicks      Int       @default(0)
+  userId      String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+  
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([shortCode])
+  @@index([userId])
 }
