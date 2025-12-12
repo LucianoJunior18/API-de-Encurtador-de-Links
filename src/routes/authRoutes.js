@@ -1,10 +1,21 @@
-import { Router } from "express";
+// src/routes/authRoutes.js
+import { Router } from 'express';
+import AuthController from '../controllers/authController.js';
+import { validateSchema } from '../middlewares/validateSchema.js';
+import { registerSchema, loginSchema } from '../schemas/authSchemas.js';
 
 const router = Router();
 
-// temporário só pra testar:
-router.get("/", (req, res) => {
-  res.json({ message: "Auth OK" });
-});
+router.post(
+  '/auth/register',
+  validateSchema(registerSchema),
+  (req, res) => AuthController.register(req, res)
+);
+
+router.post(
+  '/auth/login',
+  validateSchema(loginSchema),
+  (req, res) => AuthController.login(req, res)
+);
 
 export default router;
