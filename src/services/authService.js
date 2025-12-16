@@ -1,4 +1,4 @@
-import prisma from "../config/prisma.js";
+import prisma from "../config/prismaClient.js";
 import { generateToken } from "../config/jwt.js";
 import bcrypt from "bcryptjs";
 
@@ -121,3 +121,4 @@ export const authService = {
     return userWithoutPassword;
   },
 };
+export default authService;
