@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 
 export const authService = {
   async register(userData) {
-    const { name, email, password, age } = userData;
+    const { name, email, password  } = userData;
 
     // Verificar se já existe usuário com aquele email
     const existingUser = await prisma.user.findUnique({
@@ -24,7 +24,6 @@ export const authService = {
         name,
         email,
         password: hashedPassword,
-        age,
       },
     });
 
@@ -55,10 +54,6 @@ export const authService = {
       throw new Error("Invalid credentials");
     }
 
-    // Verificar se usuário está ativo
-    if (!user.isActive) {
-      throw new Error("User account is inactive");
-    }
 
     // Validar senha
     const isPasswordValid = await bcrypt.compare(password, user.password);
