@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 export const authService = {
   async register(userData) {
-    const { name, email, password  } = userData;
+    const { name, email, password } = userData;
 
     // Verificar se já existe usuário com aquele email
     const existingUser = await prisma.user.findUnique({
@@ -12,7 +12,7 @@ export const authService = {
     });
 
     if (existingUser) {
-      throw new Error("Email already exists");
+      throw new Error("Email já cadastrado");
     }
 
     // Hash da senha
@@ -51,15 +51,14 @@ export const authService = {
     });
 
     if (!user) {
-      throw new Error("Invalid credentials");
+      throw new Error("Credenciais inválidas");
     }
-
 
     // Validar senha
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      throw new Error("Invalid credentials");
+      throw new Error("Credenciais inválidas");
     }
 
     // Gerar token JWT
@@ -76,49 +75,6 @@ export const authService = {
       token,
     };
   },
-
-  async refreshToken(userId) {
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-    });
-
-    if (!user || !user.isActive) {
-      throw new Error("User not found or inactive");
-    }
-
-    // Gerar novo token
-    const token = generateToken({
-      userId: user.id,
-      email: user.email,
-    });
-
-    // Remover senha da resposta
-    const { password: _, ...userWithoutPassword } = user;
-
-    return {
-      user: userWithoutPassword,
-      token,
-    };
-  },
-
-  async getProfile(userId) {
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      include: {
-        posts: {
-          orderBy: { createdAt: "desc" },
-        },
-      },
-    });
-
-    if (!user) {
-      throw new Error("User not found");
-    }
-
-    // Remover senha da resposta
-    const { password: _, ...userWithoutPassword } = user;
-
-    return userWithoutPassword;
-  },
 };
+
 export default authService;
