@@ -1,4 +1,4 @@
-import LinkService from "../services/LinkService.js";
+import LinkService from "../services/linkService.js";
 
 class LinkController {
 
