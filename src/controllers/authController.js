@@ -1,4 +1,4 @@
-import AuthService from '../services/AuthService.js';
+import AuthService from '../services/authService.js';
 
 class AuthController {
   async login(req, res) {
@@ -25,7 +25,8 @@ class AuthController {
         success: true,
         message: 'Login realizado com sucesso',
         data: {
-          user: result.user
+          user: result.user,
+          token: result.token
         }
       });
     } catch (error) {

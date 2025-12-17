@@ -1,6 +1,6 @@
 import prisma from "../config/prismaClient.js";
 import { generateToken } from "../config/jwt.js";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 export const authService = {
   async register(userData) {

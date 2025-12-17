@@ -1,4 +1,3 @@
-// src/routes/authRoutes.js
 import { Router } from 'express';
 import AuthController from '../controllers/authController.js';
 import { validateSchema } from '../middlewares/validateSchema.js';
@@ -49,7 +48,7 @@ const router = Router();
  *         description: Usuário já existente
  */
 router.post(
-  '/auth/register',
+  '/register',
   validateSchema(registerSchema),
   (req, res) => AuthController.register(req, res)
 );
@@ -84,7 +83,7 @@ router.post(
  *         description: Credenciais inválidas
  */
 router.post(
-  '/auth/login',
+  '/login',
   validateSchema(loginSchema),
   (req, res) => AuthController.login(req, res)
 );

@@ -1,11 +1,8 @@
-import express from "express";
-import app from "./app.js";
 import dotenv from "dotenv";
-import router from "./routes/authRoutes.js";
+import app from "./app.js";
+
 dotenv.config();
 
-
-app.use(router);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
