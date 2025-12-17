@@ -13,7 +13,7 @@ API REST para encurtar URLs, com autenticação de usuários, contador de clique
 - Instalação
 - Configuração
 - Executando o Projeto
-- Documentação da API
+- Rotas da API
 - Swagger (OpenAPI)
 - Estrutura do Projeto
 - Testes
@@ -103,7 +103,7 @@ http://localhost:3000
 
 Produção:
 ```
-https://seu-app.onrender.com
+https://api-de-encurtador-de-links.onrender.com/api-docs/
 ```
 
 ---
