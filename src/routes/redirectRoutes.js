@@ -15,6 +15,9 @@ const router = Router();
  * /{shortCode}:
  *   get:
  *     summary: Redirecionar para URL original
+ *     description: >
+ *       Este endpoint realiza redirecionamento HTTP (301).
+ *       ⚠️ Copie a URL abaixo e cole diretamente no navegador.
  *     tags: [Redirect]
  *     parameters:
  *       - in: path
@@ -22,9 +25,16 @@ const router = Router();
  *         required: true
  *         schema:
  *           type: string
+ *           example: JsyDbJ
  *     responses:
  *       301:
  *         description: Redireciona para a URL original
+ *         headers:
+ *           Location:
+ *             description: URL de destino
+ *             schema:
+ *               type: string
+ *               example: https://www.google.com
  *       404:
  *         description: Link não encontrado
  */
